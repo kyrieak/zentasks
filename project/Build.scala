@@ -11,7 +11,7 @@ object ApplicationBuild extends Build {
     // Add your project dependencies here,
     javaCore,
     javaJdbc,
-    javaEbean
+    javaEbean,
     "postgresql" % "postgresql" % "9.1-901-1.jdbc4"
   )
 
