@@ -10,10 +10,7 @@ import com.avaje.ebean.*;
 @Entity
 public class Uzer extends Model {
 
-
-  private static final long serialVersionUID = -4436969634220710538L;
     @Id
-    @GeneratedValue
     public Integer uid;
     
     public String email;
