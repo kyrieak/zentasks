@@ -8,7 +8,7 @@ import com.avaje.ebean.*;
  * The Model superclass automatically provides a set of useful JPA helpers. */
 
 @Entity
-public class User extends Model {
+public class Uzer extends Model {
 
 
   private static final long serialVersionUID = -4436969634220710538L;
@@ -20,13 +20,17 @@ public class User extends Model {
     public String name;
     public String password;
     
-    public User(String email, String name, String password) {
+    public Uzer(String email, String name, String password) {
       this.email = email;
       this.name = name;
       this.password = password;
     }
 
-    public static Finder<String,User> find = new Finder<String,User>(
-        String.class, User.class
-    ); 
+    public static Finder<String,Uzer> find = new Finder<String,Uzer>(
+        String.class, Uzer.class
+    );
+    
+    public static Uzer auth(String email, String password) {
+    	return find.where().eq("email", email).eq("password", password).findUnique();
+    }
 }

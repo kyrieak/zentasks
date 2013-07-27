@@ -18,9 +18,19 @@ public class ModelsTest extends WithApplication {
 	
 	@Test
 	public void createAndRetrieveUser() {
-		new User("momo@taro.com", "Taro", "kibidango-ooo-").save();
-		User taro = User.find.where().eq("email", "momo@taro.com").findUnique();
+		new Uzer("momo@taro.com", "Taro", "kibidango-ooo-").save();
+		Uzer taro = Uzer.find.where().eq("email", "momo@taro.com").findUnique();
 		assertNotNull(taro);
+		assertEquals("Taro", taro.name);
 	}
+	
+	@Test
+    public void tryAuthenticateUser() {
+        new Uzer("momo@taro.com", "Taro", "kibidango-ooo-").save();
+        
+        assertNotNull(Uzer.auth("momo@taro.com", "kibidango-ooo-"));
+        assertNull(Uzer.auth("momo@taro.com", "badpassword"));
+        assertNull(Uzer.auth("momo@tataro.com", "kibidango-ooo-"));
+    }
 
 }
