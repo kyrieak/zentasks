@@ -3,6 +3,13 @@
 
 # --- !Ups
 
+create table project (
+  id                        bigint not null,
+  name                      varchar(255),
+  folder                    varchar(255),
+  constraint pk_project primary key (id))
+;
+
 create table uzer (
   uid                       integer not null,
   email                     varchar(255),
@@ -11,14 +18,36 @@ create table uzer (
   constraint pk_uzer primary key (uid))
 ;
 
+
+create table project_uzer (
+  project_id                     bigint not null,
+  uzer_uid                       integer not null,
+  constraint pk_project_uzer primary key (project_id, uzer_uid))
+;
+create sequence project_seq;
+
 create sequence uzer_seq;
 
 
 
 
+alter table project_uzer add constraint fk_project_uzer_project_01 foreign key (project_id) references project (id) on delete restrict on update restrict;
+
+alter table project_uzer add constraint fk_project_uzer_uzer_02 foreign key (uzer_uid) references uzer (uid) on delete restrict on update restrict;
+
 # --- !Downs
 
-drop table if exists uzer cascade;
+SET REFERENTIAL_INTEGRITY FALSE;
+
+drop table if exists project;
+
+drop table if exists project_uzer;
+
+drop table if exists uzer;
+
+SET REFERENTIAL_INTEGRITY TRUE;
+
+drop sequence if exists project_seq;
 
 drop sequence if exists uzer_seq;
 

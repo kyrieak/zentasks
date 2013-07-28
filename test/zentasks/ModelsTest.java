@@ -5,6 +5,7 @@ import org.junit.*;
 import static org.junit.Assert.*;
 import play.test.WithApplication;
 import static play.test.Helpers.*;
+import java.util.List;
 
 /* extending Play's WithApplication provides me with the start() method.
  * this method will automatically clean up the fake application
@@ -32,5 +33,30 @@ public class ModelsTest extends WithApplication {
         assertNull(Uzer.auth("momo@taro.com", "badpassword"));
         assertNull(Uzer.auth("momo@tataro.com", "kibidango-ooo-"));
     }
+	
+	@Test
+	public void createProject() {		
+		Uzer taro = Uzer.create("momo@taro.com", "Taro", "kibidango-ooo-");
+		Project project = Project.create("Kibidango", "Top Secret", taro);
+		
+		List<Project> result = Project.find.all();
+		
+		assertEquals(1, result.size());
+		assertEquals(project.name, result.get(0).name);
+	}
+	
+	@Test
+	public void findProjectsInvolving() {
+		Uzer taro = Uzer.create("momo@taro.com", "Taro", "kibidango-ooo-");
+		Uzer oni = Uzer.create("oni@onigashima.com", "Oni", "otakara181");
+		
+		Project.create("Kibidango", "Top Secret", taro);
+		Project.create("Treasure", "Top Secret", oni);
+		
+		List<Project> results = Project.findInvolving("momo@taro.com");
+		
+		assertEquals(1, results.size());
+		assertEquals("Kibidango", results.get(0).name);
+	}
 
 }
