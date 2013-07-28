@@ -24,15 +24,15 @@ public class Project extends Model {
 	
 	public static Model.Finder<Long, Project> find = new Model.Finder<Long, Project>(Long.class,  Project.class);
 
-	public static Project create(String name, String folder, String email) {
-		Project project = new Project(name, folder, Uzer.find.ref(email));
+	public static Project create(String name, String folder, Uzer user) {
+		Project project = new Project(name, folder, user);
 		project.save();
 		project.saveManyToManyAssociations("members");
 		return project;
 	}
 	
-	public static List<Project> findInvolving(String uzerEmail) {
-		return find.where().eq("members.email", uzerEmail).findList();
+	public static List<Project> findInvolving(String email) {
+		return find.where().eq("members.email", email).findList();
 	}
 	
 }
