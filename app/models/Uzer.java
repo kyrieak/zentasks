@@ -12,7 +12,6 @@ public class Uzer extends Model {
 
     @Id
     public Integer uid;
-    
     public String email;
     public String name;
     public String password;
@@ -21,6 +20,12 @@ public class Uzer extends Model {
       this.email = email;
       this.name = name;
       this.password = password;
+    }
+    
+    public static Uzer create(String email, String name, String password) {
+    	Uzer uzer = new Uzer(email, name, password);
+    	uzer.save();
+    	return uzer;
     }
 
     public static Finder<String,Uzer> find = new Finder<String,Uzer>(
