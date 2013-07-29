@@ -10,6 +10,17 @@ create table project (
   constraint pk_project primary key (id))
 ;
 
+create table task (
+  id                        bigint not null,
+  title                     varchar(255),
+  done                      boolean,
+  due_date                  timestamp,
+  folder                    varchar(255),
+  uzer_id                   integer,
+  project_id                bigint,
+  constraint pk_task primary key (id))
+;
+
 create table uzer (
   uid                       integer not null,
   email                     varchar(255),
@@ -25,6 +36,8 @@ create table project_uzer (
   constraint pk_project_uzer primary key (project_id, uzer_uid))
 ;
 create sequence project_seq;
+
+create sequence task_seq;
 
 create sequence uzer_seq;
 
@@ -43,11 +56,15 @@ drop table if exists project;
 
 drop table if exists project_uzer;
 
+drop table if exists task;
+
 drop table if exists uzer;
 
 SET REFERENTIAL_INTEGRITY TRUE;
 
 drop sequence if exists project_seq;
+
+drop sequence if exists task_seq;
 
 drop sequence if exists uzer_seq;
 

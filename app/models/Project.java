@@ -24,8 +24,8 @@ public class Project extends Model {
 	
 	public static Model.Finder<Long, Project> find = new Model.Finder<Long, Project>(Long.class,  Project.class);
 
-	public static Project create(String name, String folder, Uzer user) {
-		Project project = new Project(name, folder, user);
+	public static Project create(String name, String folder, Uzer uzer) {
+		Project project = new Project(name, folder, uzer);
 		project.save();
 		project.saveManyToManyAssociations("members");
 		return project;
