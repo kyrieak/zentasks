@@ -13,22 +13,21 @@ public class Task extends Model {
 	@Id
 	public Long id;
 	public String title;
-	public boolean done = false;
 	public Date dueDate;
 	public String folder;
+	public boolean done = false;
+	
 	@ManyToOne
 	private Integer uzerId;
 	@ManyToOne
 	private Long projectId;
 
-	public static Model.Finder<Long, Task> find = new Model.Finder<Long, Task>(Long.class, Task.class);
-
-	public static List<Task> findTaskFor(Uzer uzer, boolean completion) {
-		return find.fetch("project").where()
-				.eq("done", completion)
-				.eq("project.members.email", uzer.email).
-				findList();
-	}
+// Finder
+	
+	public static Model.Finder<Long, Task> find = new Model.Finder<Long, Task>(
+			Long.class, Task.class);
+	
+// Constructors
 	
 	public Task(String title, Long projectId, Integer uzerId) {
 		this.title = title;
@@ -36,6 +35,9 @@ public class Task extends Model {
 		this.uzerId = uzerId;
 	}
 	
+// Methods
+
+// #create
 	public static Task create(String title, Long projectId, Integer uzerId, Date dueDate) {
 		Task task = new Task(title, projectId, uzerId);
 		task.dueDate = dueDate;
@@ -43,14 +45,24 @@ public class Task extends Model {
 		return task;
 	}
 	
-	public String assignedTo() {
-		Uzer uzer = Uzer.find.where().eq("uid", this.uzerId).findUnique();
-		return uzer.name;
+// #findTaskFor
+	public static List<Task> findTaskFor(Uzer uzer, boolean completion) {
+		return find.fetch("project").where()
+				.eq("done", completion)
+				.eq("project.members.email", uzer.email).
+				findList();
 	}
 	
-	public String projectName() {
-		Project project = Project.find.where().eq("id", this.projectId).findUnique();
-		return project.name;
+// #getUzer	
+	public Uzer getUzer() {
+		Uzer uzer = Uzer.find.where().eq("uid", this.uzerId).findUnique();
+		return uzer;
 	}
+	
+// #getProject	
+	public Project getProject() {
+		Project project = Project.find.where().eq("id", this.projectId).findUnique();
+		return project;
+	}	
 	
 }

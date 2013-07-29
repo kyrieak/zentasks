@@ -16,14 +16,22 @@ public class Project extends Model {
 	@ManyToMany(cascade = CascadeType.REMOVE)
 	public List<Uzer> members = new ArrayList<Uzer>();
 	
+// Finder
+	
+	public static Model.Finder<Long, Project> find = new Model.Finder<Long, Project>(
+			Long.class,  Project.class);
+	
+// Constructors
+	
 	public Project(String name, String folder, Uzer owner) {
 		this.name = name;
 		this.folder = folder;
 		this.members.add(owner);
 	}
-	
-	public static Model.Finder<Long, Project> find = new Model.Finder<Long, Project>(Long.class,  Project.class);
 
+// Methods
+	
+// #create
 	public static Project create(String name, String folder, Uzer uzer) {
 		Project project = new Project(name, folder, uzer);
 		project.save();
@@ -31,8 +39,11 @@ public class Project extends Model {
 		return project;
 	}
 	
-	public static List<Project> findInvolving(String email) {
-		return find.where().eq("members.email", email).findList();
+// #findByUid	
+	public static List<Project> findByUid(Integer uid) {
+		return find.where().eq("members.uid", uid).findList();
 	}
+	
+	
 	
 }

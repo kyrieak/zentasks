@@ -13,9 +13,9 @@ create table project (
 create table task (
   id                        bigint not null,
   title                     varchar(255),
-  done                      boolean,
   due_date                  timestamp,
   folder                    varchar(255),
+  done                      boolean,
   uzer_id                   integer,
   project_id                bigint,
   constraint pk_task primary key (id))
