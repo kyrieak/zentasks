@@ -44,23 +44,19 @@ create sequence uzer_seq;
 
 
 
-alter table project_uzer add constraint fk_project_uzer_project_01 foreign key (project_id) references project (id) on delete restrict on update restrict;
+alter table project_uzer add constraint fk_project_uzer_project_01 foreign key (project_id) references project (id);
 
-alter table project_uzer add constraint fk_project_uzer_uzer_02 foreign key (uzer_uid) references uzer (uid) on delete restrict on update restrict;
+alter table project_uzer add constraint fk_project_uzer_uzer_02 foreign key (uzer_uid) references uzer (uid);
 
 # --- !Downs
 
-SET REFERENTIAL_INTEGRITY FALSE;
+drop table if exists project cascade;
 
-drop table if exists project;
+drop table if exists project_uzer cascade;
 
-drop table if exists project_uzer;
+drop table if exists task cascade;
 
-drop table if exists task;
-
-drop table if exists uzer;
-
-SET REFERENTIAL_INTEGRITY TRUE;
+drop table if exists uzer cascade;
 
 drop sequence if exists project_seq;
 

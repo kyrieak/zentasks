@@ -1,7 +1,11 @@
-@(message: String)
+@(projects: List[Project], tasks: List[Task])
 
 @main("Welcome to Play 2.1") {
     
-    <h1>@message</hi>
+    <h1>Dashboard</h1>
+    <h2>Tasks over all projects</h2>
     
+    <h3>@tasks.size()</h3>
+    <h3>@projects.size()</h3>
+
 }

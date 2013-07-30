@@ -1,0 +1,34 @@
+Uzer(taro):
+    name: "Taro"
+    email: "momo@taro.com"
+	password: "kibidango-ooo-"    
+
+Uzer(oni):
+    name: "Oni"
+    email: "oni@onigashima.com"
+    password: "otakara181"
+
+Uzer(inu):
+    name: "Inu"
+    email: "inu@kibidango.com"
+    password: "1-wt429d317"
+    
+Uzer(saru):
+    name: "Saru"
+    email: "saru@kibidango.com"
+    password: "1-wt429d317"
+
+Uzer(kiji):
+    name: "Kiji"
+    email: "kiji@kibidango.com"
+    password: "1-wt429d317"
+
+Project(kibidango):
+    name: "Kibidango"
+    folder: "Top Secret"
+    members: [taro, inu, saru, kiji]
+
+Project(treasure):
+    name: "Treasure"
+    folder: "Island"
+    members: [oni]
