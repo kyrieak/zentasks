@@ -46,10 +46,10 @@ public class Task extends Model {
 	}
 	
 // #findTaskFor
-	public static List<Task> findTaskFor(Uzer uzer, boolean completion) {
-		return find.fetch("project").where()
+	public static List<Task> findAllFor(Integer uid, boolean completion) {
+		return find.where()
 				.eq("done", completion)
-				.eq("project.members.email", uzer.email).
+				.eq("uzerId", uid).
 				findList();
 	}
 	

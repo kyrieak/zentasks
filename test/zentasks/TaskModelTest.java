@@ -29,7 +29,7 @@ public class TaskModelTest extends WithApplication {
 		Uzer taro = Uzer.findByEmail("momo@taro.com");
 		Project project = Project.findByUid(taro.uid).get(0);
 		
-		Task task = Task.create("Recruit Allies", project.id, taro.uid, new Date());
+		Task task = Task.create("Recruit Dog", project.id, taro.uid, new Date());
 		
 		List<Task> result = Task.find.all();
 		Task firstTask = result.get(0);
@@ -44,7 +44,7 @@ public class TaskModelTest extends WithApplication {
 		Uzer taro = Uzer.findByEmail("momo@taro.com");
 		Project project = Project.findByUid(taro.uid).get(0);
 		
-		new Task("Recruit Allies", project.id, taro.uid).save();
+		new Task("Recruit Dog", project.id, taro.uid).save();
 		
 		List<Task> result = Task.find.all();
 		Task firstTask = result.get(0);
@@ -59,7 +59,7 @@ public class TaskModelTest extends WithApplication {
 		Uzer taro = Uzer.findByEmail("momo@taro.com");
 		Project project = Project.findByUid(taro.uid).get(0);
 		
-		new Task("Recruit Allies", project.id, taro.uid).save();
+		new Task("Recruit Dog", project.id, taro.uid).save();
 		
 		List<Task> result = Task.find.all();
 		Task firstTask = result.get(0);
@@ -67,13 +67,29 @@ public class TaskModelTest extends WithApplication {
 		assertEquals(project.id, firstTask.getProject().id);
 		assertEquals(project.name, firstTask.getProject().name);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
+//	Task#findTaskFor
+	@Test
+	public void findTaskFor() {
+		Uzer taro = Uzer.findByEmail("momo@taro.com");
+		Uzer inu = Uzer.create("inu@kibidango.com", "Inu", "1-wt429d317");
+	    Uzer saru = Uzer.create("saru@kibidango.com", "Saru", "1-wt429d317");
+		Project project = Project.findByUid(taro.uid).get(0);
+		
+		new Task("Recruit Dog", project.id, taro.uid).save();
+		new Task("Recruit Monkey", project.id, taro.uid).save();
+		new Task("Recruit Pheasant", project.id, taro.uid).save();
+		new Task("Obtain food", project.id, inu.uid).save();
+		
+		List<Task> tarosTasks = Task.findAllFor(taro.uid, false);
+		List<Task> inusTasks = Task.findAllFor(inu.uid, false);
+		List<Task> sarusTasks = Task.findAllFor(saru.uid, false);
+		
+		assertEquals(3, tarosTasks.size());
+		assertEquals(1, inusTasks.size());
+		assertEquals(0, sarusTasks.size());
+		assertEquals(taro.name, tarosTasks.get(0).getUzer().name);
+		assertEquals(inu.name, inusTasks.get(0).getUzer().name);		
+	}
 
 }
