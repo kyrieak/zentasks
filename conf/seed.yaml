@@ -1,31 +1,31 @@
-- & taro !!models.Uzer
-  name: Taro
-  email: momo@taro.com
-	password: kibidango-ooo-
+- &taro !!models.Uzer
+  name: "Taro"
+  email: "momo@taro.com"
+  password: "kibidango-ooo-"
 
-- & oni !!models.Uzer
-  name: Oni
-  email: oni@onigashima.com
-  password: otakara181
+- &oni !!models.Uzer
+  name: "Oni"
+  email: "oni@onigashima.com"
+  password: "otakara181"
 
 - &inu !!models.Uzer
-  name: Inu
-  email: inu@kibidango.com
-  password: 1-wt429d317
+  name: "Inu"
+  email: "inu@kibidango.com"
+  password: "1-wt429d317"
     
 - &saru !!models.Uzer
-  name: Saru
-  email: saru@kibidango.com
-  password: 1-wt429d317
+  name: "Saru"
+  email: "saru@kibidango.com"
+  password: "1-wt429d317"
 
 - &kiji !!models.Uzer
-  name: Kiji
-  email: kiji@kibidango.com
-  password: 1-wt429d317
+  name: "Kiji"
+  email: "kiji@kibidango.com"
+  password: "1-wt429d317"
 
 - &kibidango !!models.Project
-    name: Kibidango
-    folder: Top Secret
+    name: "Kibidango"
+    folder: "Top Secret"
     members:
       - *taro
       - *inu
@@ -33,12 +33,7 @@
       - *kiji
 
 - &treasure !!models.Project
-    name: Treasure
-    folder: Top Secret
+    name: "Treasure"
+    folder: "Top Secret"
     members:
       - *oni
-      
-- &recruitInu !!models.Task
-  title: Recruit Inu
-  
-  
