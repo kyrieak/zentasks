@@ -1,7 +1,9 @@
 package models;
 
 import java.util.*;
+
 import javax.persistence.*;
+
 import play.db.ebean.*;
 
 
@@ -13,8 +15,8 @@ public class Project extends Model {
 	public String name;
 	public String folder;
 	
-	@ManyToMany(cascade = CascadeType.REMOVE)
-	public List<Uzer> members = new ArrayList<Uzer>();
+	@ManyToMany
+	public List<Uzer> uzers = new ArrayList<Uzer>();
 	
 // Finder
 	
@@ -26,24 +28,26 @@ public class Project extends Model {
 	public Project(String name, String folder, Uzer owner) {
 		this.name = name;
 		this.folder = folder;
-		this.members.add(owner);
+		this.uzers.add(owner);
 	}
 
 // Methods
+	
+	public List<Task> getTasks() {
+	  return Task.find.where().eq("project_id", this.id).findList();
+	}
 	
 // #create
 	public static Project create(String name, String folder, Uzer uzer) {
 		Project project = new Project(name, folder, uzer);
 		project.save();
-		project.saveManyToManyAssociations("members");
+		project.saveManyToManyAssociations("uzers");
 		return project;
 	}
 	
 // #findByUid	
 	public static List<Project> findByUid(Integer uid) {
-		return find.where().eq("members.uid", uid).findList();
-	}
-	
-	
+		return find.where().eq("uzers.uid", uid).findList();
+	}	
 	
 }

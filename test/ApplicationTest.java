@@ -14,31 +14,35 @@ import play.data.validation.Constraints.RequiredValidator;
 import play.i18n.Lang;
 import play.libs.F;
 import play.libs.F.*;
-
 import static play.test.Helpers.*;
 import static org.fest.assertions.Assertions.*;
-
+import models.*;
 
 /**
-*
-* Simple (JUnit) tests that can call all parts of a play app.
-* If you are interested in mocking a whole application, see the wiki for more details.
-*
-*/
-public class ApplicationTest {
-
-    @Test 
-    public void simpleCheck() {
-        int a = 1 + 1;
-        assertThat(a).isEqualTo(2);
-    }
-    
-    @Test
-    public void renderTemplate() {
-        Content html = views.html.index.render("Some sample text.");
-        assertThat(contentType(html)).isEqualTo("text/html");
-        assertThat(contentAsString(html)).contains("Some sample text.");
-    }
+ *
+ * Simple (JUnit) tests that can call all parts of a play app.
+ * If you are interested in mocking a whole application, see the wiki for more details.
+ *
+ */
+public class ApplicationTest extends WithApplication {
   
-   
+  @Before
+  public void setUp() {
+    start(fakeApplication(inMemoryDatabase()));
+  }
+
+  @Test 
+  public void simpleCheck() {
+    int a = 1 + 1;
+    assertThat(a).isEqualTo(2);
+  }
+
+  @Test
+  public void renderTemplate() {
+    Content html = views.html.index.render(Project.find.all(), Task.find.all());
+    assertThat(contentType(html)).isEqualTo("text/html");
+    assertThat(contentAsString(html)).contains("Tasks over all projects");
+  }
+
+
 }

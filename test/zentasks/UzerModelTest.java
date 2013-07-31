@@ -18,7 +18,7 @@ public class UzerModelTest extends WithApplication {
 		start(fakeApplication(inMemoryDatabase()));
 	}
 
-//	Uzer#findByEmail
+// Uzer#findByEmail
 	@Test
 	public void findByEmail() {
 		new Uzer("momo@taro.com", "Taro", "kibidango-ooo-").save();
@@ -28,22 +28,22 @@ public class UzerModelTest extends WithApplication {
 		assertEquals("Taro", taro.name);
 	}
 	
-//	Uzer#create	
+// Uzer#create	
 	@Test
 	public void createUzer() {
-		Uzer taro = Uzer.create("momo@taro.com", "Taro", "kibidango-ooo-");
+	  Uzer taro = Uzer.create("momo@taro.com", "Taro", "kibidango-ooo-");
 		assertNotNull(Uzer.find.where().eq("email", taro.email).findUnique());
 		assertEquals(1, Uzer.find.all().size());
 	}
 	
 	
-//	Uzer#auth
+// Uzer#auth
 	@Test
-    public void uzerAuth() {
-        Uzer taro = Uzer.create("momo@taro.com", "Taro", "kibidango-ooo-");
-        
-        assertNotNull(Uzer.auth(taro.email, "kibidango-ooo-"));
-        assertNull(Uzer.auth(taro.email, "badpassword"));
-        assertNull(Uzer.auth("momo@momo.com", "kibidango-ooo-"));
-    }
+  public void uzerAuth() {
+	  Uzer taro = Uzer.create("momo@taro.com", "Taro", "kibidango-ooo-");
+
+	  assertNotNull(Uzer.auth(taro.email, "kibidango-ooo-"));
+	  assertNull(Uzer.auth(taro.email, "badpassword"));
+	  assertNull(Uzer.auth("momo@momo.com", "kibidango-ooo-"));
+	}
 }

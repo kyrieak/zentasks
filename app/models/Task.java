@@ -18,9 +18,9 @@ public class Task extends Model {
 	public boolean done = false;
 	
 	@ManyToOne
-	private Integer uzerId;
+	private Uzer uzer;
 	@ManyToOne
-	private Long projectId;
+	private Project project;
 
 // Finder
 	
@@ -29,17 +29,25 @@ public class Task extends Model {
 	
 // Constructors
 	
-	public Task(String title, Long projectId, Integer uzerId) {
+	public Task(String title, Project project, Uzer uzer) {
 		this.title = title;
-		this.projectId = projectId;
-		this.uzerId = uzerId;
+		this.project = project;
+		this.uzer = uzer;
 	}
 	
 // Methods
+	
+	public Uzer getUzer() {
+	  return Uzer.find.where().eq("uid", this.uzer.uid).findUnique();
+	}
+	
+	public Project getProject() {
+	  return Project.find.where().eq("id", this.project.id).findUnique();
+	}
 
 // #create
-	public static Task create(String title, Long projectId, Integer uzerId, Date dueDate) {
-		Task task = new Task(title, projectId, uzerId);
+	public static Task create(String title, Project project, Uzer uzer, Date dueDate) {
+		Task task = new Task(title, project, uzer);
 		task.dueDate = dueDate;
 		task.save();
 		return task;
@@ -47,22 +55,10 @@ public class Task extends Model {
 	
 // #findTaskFor
 	public static List<Task> findAllFor(Integer uid, boolean completion) {
-		return find.where()
-				.eq("done", completion)
-				.eq("uzerId", uid).
-				findList();
+	  return find.fetch("uzer").where()
+        .eq("done", false)
+        .eq("uzer.uid", uid)
+   .findList();
 	}
-	
-// #getUzer	
-	public Uzer getUzer() {
-		Uzer uzer = Uzer.find.where().eq("uid", this.uzerId).findUnique();
-		return uzer;
-	}
-	
-// #getProject	
-	public Project getProject() {
-		Project project = Project.find.where().eq("id", this.projectId).findUnique();
-		return project;
-	}	
 	
 }
