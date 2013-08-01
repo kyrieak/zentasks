@@ -44,10 +44,10 @@ public class Project extends Model {
 		project.saveManyToManyAssociations("uzers");
 		return project;
 	}
-	
-// #findByUid	
+
+// #findByUid
 	public static List<Project> findByUid(Integer uid) {
 		return find.where().eq("uzers.uid", uid).findList();
-	}	
+	}
 	
 }

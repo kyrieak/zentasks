@@ -1,0 +1,12 @@
+@(project: Project)
+
+   <div class="folder" data-folder-id="@project.id">
+      <header>
+         <h3>@project.name</h3>
+      </header>
+      <ul class="list">
+         @project.getTasks().map { task =>
+            @views.html.task.item(task)
+         }
+      </ul>
+   </div>

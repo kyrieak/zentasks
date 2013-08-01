@@ -1,0 +1,16 @@
+@(task: Task)
+
+<li data-task-id="@task.id">
+   <h4>@task.title</h4>
+      @if(task.dueDate != null) { 
+         <time datetime="@task.dueDate">
+            @task.dueDate.format("MMM dd yyyy")
+         </time>
+      }
+
+   @if(task.getUzer() != null && task.getUzer().email != null) {
+      <span class="getUzer">
+         @task.getUzer().name
+      </span>
+   }
+</li>

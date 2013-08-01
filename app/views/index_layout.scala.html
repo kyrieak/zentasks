@@ -1,0 +1,12 @@
+@(projects: List[Project])
+
+@main(projects) {
+    
+   <article class="tasks">
+      @projects.map {
+         case (project) => {
+            @views.html.project.item(project)
+         }
+      }
+   </article>
+}

@@ -39,7 +39,7 @@ public class ApplicationTest extends WithApplication {
 
   @Test
   public void renderTemplate() {
-    Content html = views.html.index.render(Project.find.all(), Task.find.all());
+    Content html = views.html.index_layout.render(Project.find.all());
     assertThat(contentType(html)).isEqualTo("text/html");
     assertThat(contentAsString(html)).contains("Tasks over all projects");
   }

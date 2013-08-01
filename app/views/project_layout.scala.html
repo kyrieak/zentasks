@@ -1,0 +1,22 @@
+@(projectList: List[Project], projectItem: Project)
+
+@main(projectList) {
+
+<article class="tasks">
+
+   <div class="folder" data-folder-id="@projectItem.id">
+      <header>
+         <h3>@projectItem.name</h3>
+      </header>
+      
+      <ul class="list">
+         @projectItem.getTasks().map { task =>
+            @views.html.task.item(task)
+         }
+      </ul>
+   </div>
+   <div>Form should go here</div>
+</article>
+
+
+}
