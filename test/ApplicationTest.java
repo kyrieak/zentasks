@@ -41,7 +41,7 @@ public class ApplicationTest extends WithApplication {
   public void renderTemplate() {
     Content html = views.html.index_layout.render(Project.find.all());
     assertThat(contentType(html)).isEqualTo("text/html");
-    assertThat(contentAsString(html)).contains("Tasks over all projects");
+    assertThat(contentAsString(html)).contains("Dashboard");
   }
 
 
