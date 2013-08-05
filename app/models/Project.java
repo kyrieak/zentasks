@@ -47,7 +47,18 @@ public class Project extends Model {
 
 // #findByUid
 	public static List<Project> findByUid(Integer uid) {
-		return find.where().eq("uzers.uid", uid).findList();
+		return find.where()
+		            .eq("uzers.uid", uid)
+		            .findList();
+	}
+	
+// #findByEmail	
+	public static List<Project> findByEmail(String email) {
+	   Integer uid = Uzer.find.where()
+      	                    .eq("uzer.email", email)
+      	                    .findUnique()
+      	                    .uid;
+	   return findByUid(uid);
 	}
 	
 }

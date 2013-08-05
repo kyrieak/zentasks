@@ -10,11 +10,11 @@ body {
         top: 0;
         left: 0;
         right: 0;
-        height: @headerHeight;
+        height: @headerHeightInner;
     }
     & > nav {
         position: absolute;
-        top: @headerHeight;
+        top: @headerHeightOuter;
         left: 0;
         width: @drawerWidth;
         bottom: 0;
@@ -22,7 +22,7 @@ body {
     }
     & > section {
         position: absolute;
-        top: @headerHeight;
+        top: @headerHeightOuter;
         left: @drawerWidth;
         right: 0;
         bottom: 0;

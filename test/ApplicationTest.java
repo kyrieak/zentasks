@@ -1,19 +1,19 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.codehaus.jackson.JsonNode;
+//import java.util.ArrayList;
+//import java.util.HashMap;
+//import java.util.List;
+//import java.util.Map;
+//
+//import org.codehaus.jackson.JsonNode;
 import org.junit.*;
 
 import play.mvc.*;
 import play.test.*;
-import play.data.DynamicForm;
-import play.data.validation.ValidationError;
-import play.data.validation.Constraints.RequiredValidator;
-import play.i18n.Lang;
-import play.libs.F;
-import play.libs.F.*;
+//import play.data.DynamicForm;
+//import play.data.validation.ValidationError;
+//import play.data.validation.Constraints.RequiredValidator;
+//import play.i18n.Lang;
+//import play.libs.F;
+//import play.libs.F.*;
 import static play.test.Helpers.*;
 import static org.fest.assertions.Assertions.*;
 import models.*;
@@ -40,7 +40,7 @@ public class ApplicationTest extends WithApplication {
 
   @Test
   public void renderTemplate() {
-    Content html = views.html.index_layout.render(Project.find.all());
+    Content html = views.html.index_layout.render(Project.find.all(), new Uzer("sam@i.am", "SamIam", "greeneggs&ham"));
     assertThat(contentType(html)).isEqualTo("text/html");
     assertThat(contentAsString(html)).contains("Dashboard");
   }

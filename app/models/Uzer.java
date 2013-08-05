@@ -40,16 +40,23 @@ public class Uzer extends Model {
 
   //#auth
   public static Uzer auth(String email, String password) {
-    return find.where().eq("email", email).eq("password", password).findUnique();
+    return find.where()
+               .eq("email", email)
+               .eq("password", password)
+               .findUnique();
   }
 
   //#getTasks
   public List<Task> getTasks() {
-    return Task.find.where().eq("uzer_id", this.uid).findList();
+    return Task.find.where()
+                    .eq("uzer_id", this.uid)
+                    .findList();
   }
   
   //#findByEmail
   public static Uzer findByEmail(String email) {
-    return find.where().eq("email", email).findUnique();
+    return find.where()
+               .eq("email", email)
+               .findUnique();
   }
 }

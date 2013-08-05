@@ -1,6 +1,6 @@
-@(projects: List[Project])
+@(projects: List[Project], uzer: Uzer)
 
-@main(projects) {
+@main(projects, uzer) {
     
    <article class="tasks">
       @projects.map {

@@ -38,11 +38,15 @@ public class Task extends Model {
 // Methods
 	
 	public Uzer getUzer() {
-	  return Uzer.find.where().eq("uid", this.uzer.uid).findUnique();
+	  return Uzer.find.where()
+	                  .eq("uid", this.uzer.uid)
+	                  .findUnique();
 	}
 	
 	public Project getProject() {
-	  return Project.find.where().eq("id", this.project.id).findUnique();
+	  return Project.find.where()
+	                     .eq("id", this.project.id)
+	                     .findUnique();
 	}
 
 // #create
@@ -55,10 +59,10 @@ public class Task extends Model {
 	
 // #findTaskFor
 	public static List<Task> findAllFor(Integer uid, boolean completion) {
-	  return find.fetch("uzer").where()
-        .eq("done", false)
-        .eq("uzer.uid", uid)
-   .findList();
+	  return find.where()
+                .eq("done", false)
+                .eq("uzer.uid", uid)
+                .findList();
 	}
 	
 }
