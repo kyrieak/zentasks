@@ -7,6 +7,7 @@ import models.*;
 
 public class Application extends Controller {
 
+   @Security.Authenticated(Secured.class)
    public static Result index() {
 
       return ok(
@@ -19,6 +20,11 @@ public class Application extends Controller {
       return ok(login_layout.render(Form.form(Login.class)));
    }
    
+   public static Result logout() {
+      session().clear();
+      return redirect(routes.Application.login());
+   }
+    
    public static Result auth() {
       Form<Login> loginForm = Form.form(Login.class).bindFromRequest();
       if (loginForm.hasErrors()) {
